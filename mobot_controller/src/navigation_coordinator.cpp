@@ -153,13 +153,16 @@ int main(int argc, char **argv)
     float x_t2 = 0.542;
     float y_t2 = 2.572;
 
+    float x_o = current_pose.pose.position.x;
+    float y_o = current_pose.pose.position.y;
+
     ROS_INFO("STEP 1: Pre-table1");
     tryMove(x_t1/2, y_t1, 1);
 
     ROS_INFO("STEP 2: Docking table1");
     tryMove(x_t1, y_t1, 1);
 
-    ROS_INFO("Step 3: Backup");
+    ROS_INFO("Step 3: Backup from table 1");
     backUp();
 
     ROS_INFO("Step 4: Pre-table2");
@@ -167,6 +170,18 @@ int main(int argc, char **argv)
 
     ROS_INFO("Step 5: Docking table2");
     tryMove(x_t2, y_t2, 1);
+
+    ROS_INFO("Step 6: Backup from table 2");
+    backUp();
+
+    ROS_INFO("Step 7: Going back to origin");
+    tryMove(x_o, y_o,1);
+
+    float x_e = current_pose.pose.position.x;
+    float y_e = current_pose.pose.position.y;
+
+    ROS_INFO("Step 8: Reorienting to original pose");
+    tryMove(x_e + 0.001, y_e,1);
 
     ROS_INFO("Shutting down motor");
     // stop everything
