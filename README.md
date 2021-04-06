@@ -19,11 +19,6 @@ load a map of the starting pen:
 
 2. Under the directory where the mobot_controller resides:
 
-~~start the imperfect (drifty) odom node; there is also an odom topic published by gazebo, but this
-one is unrealistically good, failing to illustrate realistic odom drift~~
-
-~~`rosrun mobot_drifty_odom mobot_drifty_odom`~~
-
 Using Odom from gazebo.
 
 Run AMCL to localize the robot in the map.  AMCL updates are only about 1Hz, and thus
@@ -31,35 +26,29 @@ unsuitable for steering feedback.
 
 `rosrun amcl amcl`
 
-The odom_tf node illustrates how to combine AMCL information with imperfect odom information
-to achieve smooth pose estimates, rapidly updated, with no cumulative drift.  
 
-`rosrun odom_tf odom_tf_demo`
 
 Start mobot_controller's nodes:
-
-~~`rosrun mobot_controller modal_trajectory_controller`~~ This node is deprecated
-
-~~`rosrun mobot_controller lin_steering_wrt_odom`~~ This node is deprecated
-
-`rosrun mobot_controller 
 
 `rosrun mobot_controller current_state_publisher`
 
 `rosrun mobot_controller des_state_publisher_service`
 
+`rosrun mobot_controller linear_steering_wrt_amcl_and_odom`
+
 ## Running tests/demos
-In rviz, give the robot an approximate starting pose.
-Move the robot (under open-loop control), so AMCL will publish updated pose estimates.
+In rviz, add a `map` that reads from topic `/map` and add an `axis` that reads the tf of `base_link`
+
+Initiate the path planner:
 
 `rosrun mobot_controller navigation_coordinator`  
 
-In Rviz, display several frames to visualize how odom_tf is working.  Set the fixed frame to "map".
-Display axes for "base_link", "amcl_base_link", "est_base" and "odom".
-These will illustrate how amcl computes robot-pose updates infrequently, how the real odom frame
-moves around in the map, and how combining these to get "est_base" results in smooth robot-pose
-estimates with no cumulative drift.
-
-## Steering with merged AMCL/odometry
-See the "lin_steering" package for illustration of using the OdomTf library for steering.
+This path planner was currently set to perform the below trajectory:
+1. Predocking table 1 (reorienting vertex)
+2. Docking table 1
+3. Back up (0.5 m)
+4. Predocking table 2 (reorienting vertex)
+5. Docking table 2
+6. Back up (0.5 m)                                    (haven't done yet)
+7. Moving back and reorienting back to initial pose   (haven't done yet)
   
