@@ -470,7 +470,7 @@ void TrajBuilder::build_backup_traj(geometry_msgs::PoseStamped start_pose,
     des_state.twist.twist = halt_twist_; // insist on starting from rest
 
 
-    double trip_len = 0.50; // backing up 25 cm, keep this less than 1
+    double trip_len = 1.0; // backing up 25 cm, keep this less than 1
     double t_ramp = sqrt(trip_len / accel_max_);    // ~0.71 sec for 0.25m
     int npts_ramp = round(t_ramp / dt_);
 
