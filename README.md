@@ -1,17 +1,16 @@
-# odom_tf
-Package to illustrate how to use amcl to correct for odometry drift.  
-Amcl provides a tf message from odom frame to map frame.  Use this to
-transform odom to map coordinates.  
+# mobot_controller
+This is an updated version from the previous midterm package (which can be found here: https://github.com/ngquan0304/ecse476_midterm/tree/midterm_final)
 
-## Example usage
+## Code Usage
+
+Below are the command snippets to run the code in the simulation with mobot in side a pen navigating using map and odometry.
 
 1. Under the directory where the simulation and urdf reside:
-
 Start up gazebo and spawn mobot:
+
 `roslaunch mobot_urdf mobot_in_pen.lauch`
 
-
-load a map of the starting pen:
+Load the map of the starting pen:
 
 `roscd maps/starting_pen`
 
@@ -26,8 +25,6 @@ unsuitable for steering feedback.
 
 `rosrun amcl amcl`
 
-
-
 Start mobot_controller's nodes:
 
 `rosrun mobot_controller current_state_publisher`
@@ -37,6 +34,11 @@ Start mobot_controller's nodes:
 `rosrun mobot_controller linear_steering_wrt_amcl_and_odom`
 
 ## Running tests/demos
+
+Run rviz:
+
+`rviz`
+
 In rviz, add a `map` that reads from topic `/map` and add an `axis` that reads the tf of `base_link`
 
 Initiate the path planner:
