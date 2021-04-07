@@ -147,11 +147,11 @@ int main(int argc, char **argv)
 
     TrajBuilder trajBuilder;
 
-    float x_t1 = 3.903 - 0.1;
+    float x_t1 = 3.903 - 0.2;
     float y_t1 = 0.412;
 
-    float x_t2 = 0.542;
-    float y_t2 = 2.572;
+    float x_t2 = 0.542; //0.572
+    float y_t2 = 2.4;   
 
     float x_o = current_pose.pose.position.x;
     float y_o = current_pose.pose.position.y;
@@ -162,6 +162,8 @@ int main(int argc, char **argv)
     ROS_INFO("STEP 2: Docking table1");
     tryMove(x_t1, y_t1, 1);
 
+    ros::Duration(4.0).sleep();
+
     ROS_INFO("Step 3: Backup from table 1");
     backUp();
 
@@ -170,6 +172,8 @@ int main(int argc, char **argv)
 
     ROS_INFO("Step 5: Docking table2");
     tryMove(x_t2, y_t2, 1);
+
+    ros::Duration(4.0).sleep();
 
     ROS_INFO("Step 6: Backup from table 2");
     backUp();

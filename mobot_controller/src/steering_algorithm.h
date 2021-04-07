@@ -37,10 +37,10 @@ const double UPDATE_RATE = 50.0; // choose the desired-state publication update 
 const double K_PHI = 1.0; // control gains for steering
 const double K_PHI_D = 0.4;
 const double K_DISP = 0.25;
-const double K_TRIP_DIST = 0.005;//0.5;
+const double K_TRIP_DIST = 0.8;//0.5;
 // dynamic limitations:  these apply to the steering controller; they may be larger than the limits on des state generation
-const double MAX_SPEED = 1.0; // m/sec; adjust this
-const double MAX_OMEGA = 1.0; // rad/sec; adjust this
+const double MAX_SPEED = 0.5; // m/sec; adjust this
+const double MAX_OMEGA = 1; // rad/sec; adjust this
 
 const int STOP = 0;
 const int FORWARD = 1;

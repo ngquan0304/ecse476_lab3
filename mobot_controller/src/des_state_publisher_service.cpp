@@ -62,10 +62,10 @@ bool desStateServiceCallBack(mobot_controller::ServiceMsgRequest &request,
     ros::Rate looprate(1 / dt);
     TrajBuilder trajBuilder;
     trajBuilder.set_dt(dt);
-    trajBuilder.set_alpha_max(0.2);
-    trajBuilder.set_accel_max(0.2);
-    trajBuilder.set_omega_max(1);
-    trajBuilder.set_speed_max(1);
+    trajBuilder.set_alpha_max(0.2); // 0.2
+    trajBuilder.set_accel_max(0.2); // 0.2
+    trajBuilder.set_omega_max(1); // was 1.0
+    trajBuilder.set_speed_max(0.7); // was 1.0
 
     // calculate the desired state stream using traj_builder lib.
     nav_msgs::Odometry des_state;
